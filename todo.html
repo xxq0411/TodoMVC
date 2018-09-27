@@ -13,17 +13,16 @@
       <h1>todos</h1>
       <input 
         class="new-todo"
-        type="text"
         autofocus
         autocomplete="off"
         placeholder="What needs to be done"
         v-model="newTodo"
-        @keyup.enter="addTodo()">
+        @keyup.enter="addTodo">
     </header>
-    <section class="main" v-cloak>
+    <section class="main" v-cloak v-show="todos.length">
       <!-- TODO: toggle-all只在有todo时显示 -->
       <input class="toggle-all" type="checkbox" v-model="allDone">
-      <ul>
+      <ul class="todo-list">
         <li v-for="todo in filteredTodos"
           class="todo"
           :key="todo.id"
@@ -49,13 +48,13 @@
         {{ remaining | pluralize}} left
       </span>
       <ul class="filters">
-        <li><a href="#/all" class="{ selected: visibility == 'all'}">All</a></li>
-        <li><a href="#/active" class="{ selected: visibility == 'active'}">Active</a></li>
-        <li><a href="#/completed" class="{ selected: visibility == 'completed'}">Completed</a></li>
+        <li><a href="#/all" :class="{ selected: visibility == 'all'}">All</a></li>
+        <li><a href="#/active" :class="{ selected: visibility == 'active'}">Active</a></li>
+        <li><a href="#/completed" :class="{ selected: visibility == 'completed'}">Completed</a></li>
       </ul>
-    <button class="clear-completed" @click="removeCompleted()" v-show="todos.length > remaining">
-      Clear completed
-    </button>
+      <button class="clear-completed" @click="removeCompleted()" v-show="todos.length > remaining">
+        Clear completed
+      </button>
     </footer>
   </section>
   <footer class="infor">
@@ -94,7 +93,6 @@
       }
     }
     var app = new Vue({
-      el: '.todoapp',
       data: {
         todos: todoStorage.fetch(),
         newTodo: '',
@@ -110,6 +108,10 @@
         }
       },
       computed: {
+        // 根据visibility返回过滤后的todo
+        filteredTodos () {
+            return filters[this.visibility](this.todos)
+        },
         // 共有几个未做完的todo
         remaining () {
           return filters.active(this.todos).length
@@ -125,14 +127,14 @@
               todo.completed = value
             })
           }
-        },
-          // 根据visibility返回过滤后的todo
-          filteredTodos () {
-            return filters[this.visibility](this.todos)
-          }
+        }
       },
-      mathods: {
-        // 增加todo
+      filters: {
+        pluralize (n) {
+          return n === 1 ? 'item' : 'items'
+        }
+      },
+      methods: {
         addTodo () {
           // a 为true 则返回 b，a 为false则返回 a
           var value = this.newTodo && this.newTodo.trim()
@@ -175,11 +177,6 @@
           todo.title = this.beforeEditCache
         }
       },
-      filters: {
-        pluralize (n) {
-          return n === 1 ? 'item' : 'items'
-        }
-      },
       directives: {
         // 根据todo是否等于editTodo来判定该表单是否聚焦
         'todo-focus': function (el, binding) {
@@ -201,6 +198,7 @@
     window.addEventListener('hashchange', onHashChange)
     // TODO: 为何直接调用？
     onHashChange()
+    app.$mount('.todoapp')
   </script>
 </body>
 </html>
