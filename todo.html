@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="./style.css" rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
   <title>Document</title>
 </head>
 <body>
@@ -15,13 +17,18 @@
         class="new-todo"
         autofocus
         autocomplete="off"
-        placeholder="What needs to be done"
+        placeholder="What needs to be done ?"
         v-model="newTodo"
         @keyup.enter="addTodo">
     </header>
     <section class="main" v-cloak v-show="todos.length">
       <!-- TODO: toggle-all只在有todo时显示 -->
-      <input class="toggle-all" type="checkbox" v-model="allDone">
+      <input
+        :class="{allDoneCompleted: allDone}" 
+        class="toggle-all el-icon-arrow-down" 
+        type="checkbox" 
+        v-model="allDone"
+      >
       <ul class="todo-list">
         <li v-for="todo in filteredTodos"
           class="todo"
@@ -52,7 +59,8 @@
         <li><a href="#/active" :class="{ selected: visibility == 'active'}">Active</a></li>
         <li><a href="#/completed" :class="{ selected: visibility == 'completed'}">Completed</a></li>
       </ul>
-      <button class="clear-completed" @click="removeCompleted()" v-show="todos.length > remaining">
+      <button class="clear-completed" @click="removeCompleted()" v-show="todos.length
+       > remaining">
         Clear completed
       </button>
     </footer>
@@ -184,6 +192,7 @@
             el.focus()
           }
         }
+
       } 
     })
     function onHashChange () {
