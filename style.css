@@ -1,0 +1,89 @@
+html,body {
+  width: 100%;
+  background-color:#f5f5f5;
+  margin: 0;
+  padding: 0;
+  display:inline-block
+}
+.todoapp {
+  text-align: center;
+}
+.infor {
+  text-align: center;
+  color:rgba(0,0,0,0.3);
+  margin: 50px;
+}
+.infor a {
+  color:rgba(0,0,0,0.3);
+  text-decoration: none;
+}
+.infor a:hover {
+  text-decoration-line: underline;
+}
+h1 {
+  color: #ead7d7;
+  font-size: 100px;
+  font-weight: 500;    
+  margin: 35px;
+}
+.new-todo {
+  padding: 15px 15px 15px 60px;
+  font-size:20px;
+  border: none;
+  width: 400px;
+  height: 23px; 
+  box-shadow: 0px 2px 15px rgba(0,0,0,0.3);
+  background: rgba(0,0,0,0.003);
+}
+.new-todo::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  font-style: italic;
+  font-size:20px;
+  line-height:initial;
+  color: rgba(0,0,0,0.3)
+}
+.new-todo:active {
+  outline: none;
+}
+.new-todo:hover {
+  outline: none;
+}
+.new-todo:focus {
+  outline: none;
+}
+.toggle-all {
+  background-color: rgba(0,0,0,0.003);
+  color: rgba(0,0,0,0.5);
+  width: 20px;
+  -webkit-appearance: none;
+  height: 20px;
+  transform: translate(-208px,-38px);
+}
+.toggle-all:focus{
+  outline-color: rgba(0,0,0,0.003);
+}
+.el-icon-arrow-down:before {
+  content: "\e603";
+  font-size: 20px;
+  font-weight: 800;
+}
+.allDoneCompleted {
+  color: rgba(0,0,0,1);
+}
+.filters {
+  display: inline-block;
+  margin: 0;
+  padding:0;
+}
+.filters li {
+  display: inline-block;
+  margin: 0;
+  padding:0;
+}
+.footer {
+  width: 475px;
+  margin: 0 auto;
+  height: 40px;
+  padding: 0;
+  background-color: rgba(0,0,0,0.003);
+  box-shadow: 0px 2px 15px rgba(0,0,0,0.3);
+}
