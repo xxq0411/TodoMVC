@@ -90,6 +90,10 @@ h1 {
   height: 40px;
   padding: 0;
   border: rgba(0,0,0,0.1) 1px solid;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
 .main {
   margin: 0 auto;
@@ -115,3 +119,34 @@ h1 {
   width:500px;
   position: relative;
 }
+.button-wrapper {
+  display: inline-block;
+  width: 113px;
+}
+.filters li a {
+  text-decoration: none;
+  color: rgba(0,0,0,0.3);
+  padding: 1px;
+}
+.filters li a.selected {
+  color: black;
+  border-radius: 5px;
+}
+.clear-completed{
+  -webkit-appearance:none;
+  border:none;
+  background:#f5f5f5;
+}
+.todo-count {
+  width: 86px;
+}
+.todo .edit {
+  display: none;
+}
+.todo {
+  display: flex;
+  align-items: center;
+}
+.todo-list .editing .edit {
+  display: inline-block
+} 

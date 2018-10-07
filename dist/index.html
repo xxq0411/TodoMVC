@@ -34,18 +34,21 @@
     </section>
     <footer class="footer" v-show="todos.length" v-cloak="">
       <span class="todo-count">
+        还剩
         <strong>{{ remaining }}</strong>
-        {{ remaining | pluralize}} left
+        条
       </span>
       <ul class="filters">
-        <li><a href="#/all" :class="{ selected: visibility == 'all'}">All</a></li>
-        <li><a href="#/active" :class="{ selected: visibility == 'active'}">Active</a></li>
-        <li><a href="#/completed" :class="{ selected: visibility == 'completed'}">Completed</a></li>
+        <li><a href="#/all" :class="{ selected: visibility == 'all'}">全部列表</a></li>
+        <li><a href="#/active" :class="{ selected: visibility == 'active'}">未完成</a></li>
+        <li><a href="#/completed" :class="{ selected: visibility == 'completed'}">已完成</a></li>
       </ul>
-      <button class="clear-completed" @click="removeCompleted()" v-show="todos.length
-       > remaining">
-        Clear completed
-      </button>
+      <div class="button-wrapper">
+        <button class="clear-completed" @click="removeCompleted()" v-show="todos.length
+        > remaining">
+          清除
+        </button>
+      </div>
     </footer>
   </section>
   <footer class="infor">
@@ -115,11 +118,6 @@ var app = new Vue({
           todo.completed = value;
         });
       }
-    }
-  },
-  filters: {
-    pluralize: function pluralize(n) {
-      return n === 1 ? 'item' : 'items';
     }
   },
   methods: {
