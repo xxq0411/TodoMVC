@@ -16,6 +16,7 @@
       <h1>计划管理</h1>
       <div class="new-todo-wrapper">
         <input
+          v-show="todos.length"
           :class="allDone ? 'el-icon-close' : 'el-icon-check'" 
           class="toggle-all" 
           type="checkbox" 
@@ -31,20 +32,21 @@
           <!-- TODO: toggle-all只在有todo时显示 -->
       </div>
     </header>
-    <section class="main" v-cloak v-show="todos.length">
+    <section class="main" v-show="todos.length">
       <ul class="todo-list">
         <li v-for="todo in filteredTodos"
           class="todo"
           :key="todo.id"
           :class="{ completed: todo.completed, editing: todo == editedTodo }">
-          <div class="view">
+          <div class="view" >
             <el-checkbox
               v-model="todo.completed"
             ></el-checkbox>
-            <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
-            <button
-              class="destroy" 
-              @click="removeTodo(todo)">x</button>
+            <label class="todo-title" @dblclick="editTodo(todo)" v-cloak>{{ todo.title }}</label>
+            <el-button 
+              type="text"
+              icon="el-icon-close"
+              @click="removeTodo(todo)"></el-button>
           </div>
           <!--TODO: v-todo-focus自定义指令？？ -->
           <input type="text" class="edit"
@@ -56,8 +58,8 @@
         </li>
       </ul>
     </section>
-    <footer class="footer" v-show="todos.length" v-cloak>
-      <span class="todo-count">
+    <footer class="footer" v-show="todos.length" >
+      <span class="todo-count" v-cloak>
         还剩
         <strong>{{ remaining }}</strong>
         条
@@ -70,7 +72,7 @@
       <div class="button-wrapper">
         <button class="clear-completed" @click="removeCompleted()" v-show="todos.length
         > remaining">
-          清除
+          清除已完成
         </button>
       </div>
     </footer>
@@ -82,17 +84,17 @@
     var STORAGE_KEY = 'todos-vuejs-2.o'
 
     var todoStorage = {
-      // 从localstorage获取todos,并给每个todo加上id属性
+      // 从sessionstorage获取todos,并给每个todo加上id属性
       fetch () {
-        var todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
+        var todos = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || '[]')
         todos.forEach(function (todo, index) {
           todo.id = index
         })
-        todoStorage.uid = todos.length
+        sessionStorage.uid = todos.length
         return todos
       },
       save: function (todos) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
+        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
       }
     }
 
@@ -209,8 +211,7 @@
             el.focus()
           }
         }
-
-      } 
+      }
     })
     
     function onHashChange () {
