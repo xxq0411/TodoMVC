@@ -9,7 +9,8 @@
   <title>Document</title>
 <script src="/style.e308ff8e.js"></script></head>
 <body>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
   <section class="todoapp">
     <header class="header">
       <h1>计划管理</h1>
@@ -23,7 +24,7 @@
       <ul class="todo-list">
         <li v-for="todo in filteredTodos" class="todo" :key="todo.id" :class="{ completed: todo.completed, editing: todo == editedTodo }">
           <div class="view">
-            <input type="checkbox" class="toggle" v-model="todo.completed">
+            <el-checkbox v-model="todo.completed"></el-checkbox>
             <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
             <button class="destroy" @click="removeTodo(todo)">x</button>
           </div>
@@ -53,7 +54,7 @@
   </section>
   <footer class="infor">
       <p>双击计划列进行编辑</p>
-      <p>作者 <a href="https://github.com/xxq0411">Da</a></p>
+      <p>作者 <a href="https://github.com/xxq0411">Da</a></p> 
   <script>var STORAGE_KEY = 'todos-vuejs-2.o';
 var todoStorage = {
   // 从localstorage获取todos,并给每个todo加上id属性
@@ -192,5 +193,5 @@ window.addEventListener('hashchange', onHashChange); // TODO: 为何直接调用
 
 onHashChange();
 app.$mount('.todoapp');</script>
-</footer></body>
+ </footer></body>
 </html>

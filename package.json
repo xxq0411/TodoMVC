@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/xxq0411/TodoMVC/issues"
   },
-  "homepage": "https://github.com/xxq0411/TodoMVC#readme"
+  "homepage": "https://github.com/xxq0411/TodoMVC#readme",
+  "dependencies": {
+    "element": "^0.1.4"
+  }
 }

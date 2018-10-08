@@ -134,6 +134,7 @@ h1 {
 }
 .clear-completed{
   -webkit-appearance:none;
+  appearance:none;
   border:none;
   background:#f5f5f5;
 }
@@ -142,11 +143,34 @@ h1 {
 }
 .todo .edit {
   display: none;
+  width:400px;
+  height: 28px;
+  font-size:20px;
+}
+.todo .edit:focus {
+  outline-color: gray;
 }
 .todo {
   display: flex;
+  justify-content: flex-start;
   align-items: center;
 }
 .todo-list .editing .edit {
   display: inline-block
 } 
+.todo-list .editing .view {
+  display:none;
+}
+.el-checkbox {
+  width:50px;
+}
+.el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+  background-color: rgb(87, 87, 87) !important;
+  border-color: rgb(148, 148, 148) !important;
+}
+.el-checkbox__inner:hover {
+  border-color: rgb(119, 119, 119) !important;
+}
+.el-checkbox .is-focus .el-checkbox__inner {
+  border-color: #b5b5b5;
+}
